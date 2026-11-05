@@ -90,8 +90,8 @@ and optional CRC checking.
 Packet lengths above 64 bytes and a `packet_length` lambda are supported for receive only. The receiver
 drains the CC1101 RX FIFO while the packet is being received and uses the packet length handling described
 in the CC1101 datasheet sections 15.2.1 and 15.2.2. Long packet reception depends on the ESPHome loop
-draining the RX FIFO before it overflows. Long packet transmission is not implemented; `cc1101.send_packet`
-only supports packets that fit into the CC1101 TX FIFO.
+draining the RX FIFO before it overflows. Long packet transmission is not implemented: with such a
+`packet_length`, `cc1101.send_packet` is rejected. `crc_enable` is not available with long packets.
 
 - **crc_enable** (*Optional*, boolean): Enable CRC-16 calculation and checking. The CC1101 uses
   CRC-16-IBM (polynomial 0x8005). Defaults to `false`.
